@@ -41,7 +41,6 @@ app.get('/account', (req, res) => {
 });
 
 // --- Categories ---
-// --- Artists Route ---
 app.get('/artists', async (req, res) => {
     try {
         const artists = await Event.find({ category: 'artist' });
@@ -103,24 +102,8 @@ app.get('/venues', async (req, res) => {
     }
 });
 
-// --- Event Details ---
-// NOTE: Later, we will combine these into one dynamic route using MongoDB.
-// For now, let's just get them working as they are.
-app.get('/event-details', (req, res) => {
-    res.render('event-details');
-});
 
-app.get('/event-details2', (req, res) => {
-    res.render('event-details2');
-});
 
-app.get('/event-details3', (req, res) => {
-    res.render('event-details3');
-});
-
-// Add routes for your other pages (comedy, concerts, etc.) here...
-
-// 5. Start Server
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
