@@ -4,25 +4,22 @@ const Event = require('./models/event');
 const app = express();
 const port = 3000;
 
-// 1. Static Files (CSS, Images, JS)
-// This tells Express to look in the 'public' folder for style.css, script.js, etc.
+
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
-// 2. Set View Engine
+
 app.set('view engine', 'ejs');
 
-// 3. MongoDB Connection (Requirement)
-// We will set up the actual database later.
+
+
 mongoose.connect('mongodb+srv://varun_nair:skel1234@projectdb.ambwga7.mongodb.net/?appName=projectDB')
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
-// 4. Routes (Navigation)
-// --- Main Navigation ---
+
 app.get('/', async (req, res) => {
     try {
-        // Fetch 3 events to display as "Featured"
-        // .limit(3) grabs the first 3. You can also filter by { category: 'festival' }
+
         const featuredEvents = await Event.find({}).limit(3);
         
         res.render('index', { featuredEvents: featuredEvents });
@@ -53,10 +50,9 @@ app.get('/artists', async (req, res) => {
 
 app.get('/comedy', async (req, res) => {
     try {
-        // 1. Fetch only events where category is 'comedy'
+        
         const comedyEvents = await Event.find({ category: 'comedy' });
         
-        // 2. Render 'comedy.ejs' and pass the data as 'comedyEvents'
         res.render('comedy', { comedyEvents: comedyEvents });
     } catch (err) {
         console.log(err);
@@ -66,10 +62,10 @@ app.get('/comedy', async (req, res) => {
 
 app.get('/concerts', async (req, res) => {
     try {
-        // 1. Fetch all events where category is 'concert'
+        
         const concerts = await Event.find({ category: 'concert' });
         
-        // 2. Render the page and pass the data to it
+        
         res.render('concerts', { concerts: concerts });
     } catch (err) {
         console.log(err);
@@ -79,11 +75,10 @@ app.get('/concerts', async (req, res) => {
 
 app.get('/festivals', async (req, res) => {
     try {
-        // 1. Fetch the data from MongoDB
+        
         const festivals = await Event.find({ category: 'festival' });
         
-        // 2. Send the HTML file AND the data object
-        // notice the second part: { festivals: festivals }
+        
         res.render('festivals', { festivals: festivals }); 
     } catch (err) {
         console.log(err);
@@ -93,7 +88,7 @@ app.get('/festivals', async (req, res) => {
 
 app.get('/venues', async (req, res) => {
     try {
-        // Fetch events where category is 'venue'
+        
         const venues = await Event.find({ category: 'venue' });
         res.render('venues', { venues: venues });
     } catch (err) {
@@ -108,17 +103,17 @@ app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
 
-// --- Admin Routes ---
+// --- Admin` ---
 
-// 1. Show the Add Event Page
+// Show the Add Event Page
 app.get('/add-event', (req, res) => {
     res.render('add-event');
 });
 
-// 2. Handle the Form Submission (Create)
+// Handle the Form Submission (Create)
 app.post('/add-event', async (req, res) => {
     try {
-        // Create a new Event using the data from the form (req.body)
+        // Create a new Event using the data from the form 
         const newEvent = new Event(req.body);
         
         // Save to MongoDB
@@ -132,9 +127,9 @@ app.post('/add-event', async (req, res) => {
     }
 });
 
-// --- ADMIN DASHBOARD ROUTES ---
+// --- ADMIN DASHBOARD ---
 
-// 1. Get All Events for the Dashboard
+// Get All Events for the Dashboard
 app.get('/admin', async (req, res) => {
     try {
         // Fetch EVERYTHING from the database
@@ -146,15 +141,13 @@ app.get('/admin', async (req, res) => {
     }
 });
 
-// 2. Handle Delete Request
+// Handle Delete Request
 app.post('/delete-event', async (req, res) => {
     try {
         const idToDelete = req.body.id;
         
-        // Find by ID and remove it
         await Event.findByIdAndDelete(idToDelete);
         
-        // Refresh the page to show it's gone
         res.redirect('/admin');
     } catch (err) {
         console.log(err);
@@ -162,9 +155,9 @@ app.post('/delete-event', async (req, res) => {
     }
 });
 
-// --- EDIT ROUTES ---
+// --- EDIT PAGE ---
 
-// 1. Show the Edit Form
+//  Show the Edit Form
 app.get('/edit-event/:id', async (req, res) => {
     try {
         // Find the specific event clicked
@@ -176,7 +169,7 @@ app.get('/edit-event/:id', async (req, res) => {
     }
 });
 
-// 2. Handle the Update
+//  Handle the Update
 app.post('/edit-event/:id', async (req, res) => {
     try {
         // Find by ID and update with the Form Data (req.body)
@@ -190,7 +183,7 @@ app.post('/edit-event/:id', async (req, res) => {
     }
 });
 
-// --- DYNAMIC DETAILS ROUTE ---
+// --- DYNAMIC DETAILS PAGE CODE ---
 app.get('/events/:id', async (req, res) => {
     try {
         // 1. Find the event by the ID passed in the URL
