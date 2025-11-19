@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 const eventSchema = new mongoose.Schema({
-    title: { type: String, required: true }, // Works for Concert Title OR Venue Name
-    artist: String,                          // For concerts
-    location: String,                        // For concerts (City for venues)
-    date: String,                            // For concerts
-    price: String,                           // For concerts
-    priceClass: String,                      // For styling (red/blue)
-    image: String,                           // For both
-    shows: Number,                           // Specific for Venues
+    title: { type: String, required: true }, 
+    artist: String,                          
+    location: String,                       
+    date: String,                            
+    price: String,                           
+    priceClass: String,                      
+    image: String,                           
+    shows: Number,                           
     category: { 
         type: String, 
         enum: ['concert', 'venue', 'comedy', 'festival','artist'], 

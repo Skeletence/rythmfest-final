@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Event = require('./models/event');
 
-// *** REPLACE WITH YOUR PASSWORD ***
 const dbURI = 'mongodb+srv://varun_nair:skel1234@projectdb.ambwga7.mongodb.net/?appName=projectDB';
 
 mongoose.connect(dbURI)
@@ -41,7 +40,7 @@ const comedy = [
     { title: "Aakash Gupta", artist: "Excuse Me Brother!", date: "Coming Soon", location: "Mumbai", price: "Get Tickets", image: "/images/aakash.jpeg", category: "comedy" }
 ];
 
-// 5. ARTISTS (New Data!)
+// 5. ARTISTS
 const artists = [
     { title: "Arijit Singh", price: "12 Shows", image: "/images/arijitsingh.jpg", category: "artist" },
     { title: "Nucleya", price: "8 Shows", image: "/images/nucleya.jpg", category: "artist" },
@@ -60,7 +59,7 @@ const seedDB = async () => {
     await Event.insertMany(venues);
     await Event.insertMany(festivals);
     await Event.insertMany(comedy);
-    await Event.insertMany(artists); // <--- Inserting Artists
+    await Event.insertMany(artists); 
     console.log("Data Seeded Successfully!");
     mongoose.connection.close();
 };

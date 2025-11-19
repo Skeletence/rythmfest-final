@@ -18,15 +18,7 @@ mongoose.connect('mongodb+srv://varun_nair:skel1234@projectdb.ambwga7.mongodb.ne
 
 
 app.get('/', async (req, res) => {
-    try {
-
-        const featuredEvents = await Event.find({}).limit(3);
-        
-        res.render('index', { featuredEvents: featuredEvents });
-    } catch (err) {
-        console.log(err);
-        res.status(500).send("Error loading homepage");
-    }
+        res.render('index');
 });
 
 app.get('/signin', (req, res) => {
