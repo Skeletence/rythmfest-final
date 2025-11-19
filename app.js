@@ -19,8 +19,17 @@ mongoose.connect('mongodb+srv://varun_nair:skel1234@projectdb.ambwga7.mongodb.ne
 
 // 4. Routes (Navigation)
 // --- Main Navigation ---
-app.get('/', (req, res) => {
-    res.render('index');
+app.get('/', async (req, res) => {
+    try {
+        // Fetch 3 events to display as "Featured"
+        // .limit(3) grabs the first 3. You can also filter by { category: 'festival' }
+        const featuredEvents = await Event.find({}).limit(3);
+        
+        res.render('index', { featuredEvents: featuredEvents });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Error loading homepage");
+    }
 });
 
 app.get('/signin', (req, res) => {
@@ -32,12 +41,28 @@ app.get('/account', (req, res) => {
 });
 
 // --- Categories ---
-app.get('/artists', (req, res) => {
-    res.render('artists');
+// --- Artists Route ---
+app.get('/artists', async (req, res) => {
+    try {
+        const artists = await Event.find({ category: 'artist' });
+        res.render('artists', { artists: artists });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Error loading artists");
+    }
 });
 
-app.get('/comedy', (req, res) => {
-    res.render('comedy');
+app.get('/comedy', async (req, res) => {
+    try {
+        // 1. Fetch only events where category is 'comedy'
+        const comedyEvents = await Event.find({ category: 'comedy' });
+        
+        // 2. Render 'comedy.ejs' and pass the data as 'comedyEvents'
+        res.render('comedy', { comedyEvents: comedyEvents });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Error loading comedy shows");
+    }
 });
 
 app.get('/concerts', async (req, res) => {
@@ -53,8 +78,18 @@ app.get('/concerts', async (req, res) => {
     }
 });
 
-app.get('/festivals', (req, res) => {
-    res.render('festivals');
+app.get('/festivals', async (req, res) => {
+    try {
+        // 1. Fetch the data from MongoDB
+        const festivals = await Event.find({ category: 'festival' });
+        
+        // 2. Send the HTML file AND the data object
+        // notice the second part: { festivals: festivals }
+        res.render('festivals', { festivals: festivals }); 
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Error loading festivals");
+    }
 });
 
 app.get('/venues', async (req, res) => {
@@ -169,5 +204,18 @@ app.post('/edit-event/:id', async (req, res) => {
     } catch (err) {
         console.log(err);
         res.send("Error updating event");
+    }
+});
+
+// --- DYNAMIC DETAILS ROUTE ---
+app.get('/events/:id', async (req, res) => {
+    try {
+        // 1. Find the event by the ID passed in the URL
+        const event = await Event.findById(req.params.id);
+        
+        // 2. Render the details page with that data
+        res.render('details', { event: event });
+    } catch (err) {
+        res.send("Event not found.");
     }
 });

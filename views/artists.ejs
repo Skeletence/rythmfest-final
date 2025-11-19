@@ -1,110 +1,63 @@
 <%- include('partials/header') %>
-    <main class="container">
-        <h1 class="page-title">Popular Artists</h1>
-        <div class="grid-container">
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/arijitsingh.jpg" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Arijit Singh</h3>
-                <a href="#" class="shows-btn btn-green">12 Shows</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/nucleya.jpg" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Nucleya</h3>
-                <a href="#" class="shows-btn btn-green">8 Shows</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/prateekkuhad.jpg" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Prateek Kuhad</h3>
-                <a href="#" class="shows-btn btn-green">15 Shows</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/ritviz.jpg" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Ritviz</h3>
-                <a href="#" class="shows-btn btn-green">10 Shows</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/shreyaghoshal.jpeg" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Shreya Ghoshal</h3>
-                <a href="#" class="shows-btn btn-green">9 Shows</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/anuvjain.webp" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Anuv Jain</h3>
-                <a href="#" class="shows-btn btn-green">18 Shows</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/divine.jpeg" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Divine</h3>
-                <a href="#" class="shows-btn btn-green">7 Shows</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/sunidhichauhan.jpg" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Sunidhi Chauhan</h3>
-                <a href="#" class="shows-btn btn-green">5 Shows</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/indianocean.jpg" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Indian Ocean</h3>
-                <a href="#" class="shows-btn btn-green">11 Shows</a>
-            </div>
-        </div>
-        <a href="#" class="view-all-btn" style="background: linear-gradient(45deg, #c039d9, #e35dbe); border: none;">Explore More Artists</a>
-    </main>
 
-    <div class="subscription-section">
-        <h2>Never Miss A Beat</h2>
-        <p>Subscribe to get notified about the hottest events and exclusive pre-sale access</p>
-        <form class="subscription-form">
-            <input type="email" placeholder="Enter Email">
-            <button type="submit">Subscribe</button>
-        </form>
+<main class="container">
+    <h1 class="page-title">Popular Artists</h1>
+    
+    <div style="margin-bottom: 30px; text-align: center;">
+        <input type="text" id="searchInput" onkeyup="filterArtists()" placeholder="Search artists..." 
+        style="padding: 12px; width: 80%; max-width: 400px; border: 1px solid #ccc; border-radius: 25px; outline: none; font-size: 16px;">
     </div>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>RhythmFest</h3>
-                <p>Your ultimate destination for live entertainment. From concerts to comedy, we've got the tickets to your next adventure.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Events</h3>
-                <ul>
-                    <li><a href="concerts.html">Concerts</a></li>
-                    <li><a href="festivals.html">Festivals</a></li>
-                    <li><a href="comedy.html">Comedy</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Socials</h3>
-                <ul>
-                    <li><a href="https://www.youtube.com/">Youtube</a></li>
-                    <li><a href="https://www.instagram.com/">Instagram</a></li>
-                    <li><a href="https://www.x.com/">Twitter (X)</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            © 2025 RhythmFest. All rights reserved.
-        </div>
-    </footer>
+    <div id="artists-container" class="events-grid">
+        
+        <% if (artists.length > 0) { %>
+            <% artists.forEach(artist => { %>
+                
+                <div class="event-card" style="text-align: center;">
+                    
+                    <div class="event-card-image">
+                        <img src="<%= artist.image %>" alt="<%= artist.title %>">
+                    </div>
+                    
+                    <div class="event-details" style="flex-grow: 1;">
+                        <h3 style="margin-top: 15px;"><%= artist.title %></h3>
+                    </div>
 
-</body>
-</html>
+                    <div class="event-action">
+                        <a href="#" class="btn-standard" style="background-color: #28a745; color: white;">
+                            <%= artist.price %> </a>
+                    </div>
+                </div>
+
+            <% }) %>
+        <% } else { %>
+            <p>No artists found.</p>
+        <% } %>
+
+    </div>
+    
+    <a href="#" class="view-all-btn" style="background: linear-gradient(45deg, #c039d9, #e35dbe); border: none; margin-top: 30px;">
+        Explore More Artists
+    </a>
+
+</main>
+
+<script>
+    function filterArtists() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toUpperCase();
+        const container = document.getElementById('artists-container');
+        const cards = container.getElementsByClassName('event-card');
+
+        for (let i = 0; i < cards.length; i++) {
+            const text = cards[i].textContent || cards[i].innerText;
+            if (text.toUpperCase().indexOf(filter) > -1) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+<%- include('partials/footer') %>

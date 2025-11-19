@@ -11,7 +11,7 @@ const eventSchema = new mongoose.Schema({
     shows: Number,                           // Specific for Venues
     category: { 
         type: String, 
-        enum: ['concert', 'venue', 'comedy', 'festival'], 
+        enum: ['concert', 'venue', 'comedy', 'festival','artist'], 
         required: true 
     }
 });

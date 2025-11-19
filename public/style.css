@@ -612,3 +612,290 @@ footer {
     border-radius: 8px;
     text-align: center;
 }
+/* The Container that holds the cards */
+.events-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center; /* Centers items if there are only a few */
+    margin-top: 20px;
+}
+
+/* The Individual Card */
+.event-card {
+    width: 300px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #040303;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for pop */
+    transition: transform 0.2s ease; /* Hover effect */
+    display: flex;
+    flex-direction: column;
+}
+
+.event-card:hover {
+    transform: translateY(-5px); /* Moves up slightly when hovered */
+}
+
+/* The Image inside the card */
+.event-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover; /* Ensures image doesn't stretch/squish */
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+/* The Text Details */
+.event-details h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: #fffcfc;
+}
+
+.event-details p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* The Button or Price Tag */
+.event-action {
+    margin-top: auto; /* Pushes button to bottom even if text is short */
+    padding-top: 15px;
+}
+
+.btn-standard {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #9d1a33; /* Your theme red */
+    color: white;
+    padding: 10px 0;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-standard:hover {
+    background-color: #7a1428;
+}
+/* --- EVENT DETAILS PAGE --- */
+
+.details-main {
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #666;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    color: #9d1a33; /* Brand Red */
+}
+
+.details-wrapper {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap; /* Stacks vertically on mobile */
+    align-items: flex-start;
+}
+
+/* Image Section */
+.details-image-col {
+    flex: 1;
+    min-width: 300px;
+}
+
+.details-img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    object-fit: cover;
+}
+
+/* Info Section */
+.details-info-col {
+    flex: 1;
+    min-width: 300px;
+}
+
+.category-badge {
+    background-color: #eee;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #555;
+    font-weight: bold;
+}
+
+.details-title {
+    margin: 15px 0;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    color: #222;
+}
+
+.details-subtitle {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+/* The Grey Box */
+.info-box {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    margin-bottom: 25px;
+}
+
+.info-row {
+    margin: 8px 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.price-highlight {
+    color: #9d1a33;
+    font-weight: bold;
+}
+
+.details-desc {
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+/* Booking Button */
+.btn-book {
+    background-color: #9d1a33;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+.btn-book:hover {
+    background-color: #7a1428;
+}
+featured-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Dark Card Style */
+.featured-card {
+    background-color: #111; /* Dark Background */
+    border: 1px solid #333;
+    color: white;
+    width: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+}
+
+.featured-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Image Wrapper (for positioning the badge) */
+.card-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+}
+
+.card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.badge-popular {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: #d63384; /* Pink/Magenta color */
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.featured-details {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-title {
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.featured-subtitle {
+    color: #aaa; 
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.featured-date {
+    color: #ccc;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+}
+
+
+.featured-action {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.featured-price {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.btn-featured {
+    background-color: #d63384; 
+    color: white;
+    padding: 8px 20px;
+    text-decoration: none;
+    border-radius: 50px; 
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-featured:hover {
+    background-color: #b02a6b;
+}

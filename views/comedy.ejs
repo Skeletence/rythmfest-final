@@ -1,95 +1,61 @@
 <%- include('partials/header') %>
-    <main class="container">
-        <h1 class="page-title">Comedy Shows</h1>
-        <div class="grid-container">
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/anubhav.webp" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Anubhav Singh Bassi - Live</h3>
-                <p style="color: #aaa;">'Kisi Ko Batana Mat' Tour</p>
-                <a href="#" class="shows-btn btn-comedy">Get Tickets</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/zakir.jpg" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Zakir Khan - Tathastu</h3>
-                <p style="color: #aaa;">New Stand-Up Special</p>
-                <a href="#" class="shows-btn btn-comedy">Get Tickets</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/kenny.webp" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Kenny Sebastian - Professor of Tomfoolery</h3>
-                <p style="color: #aaa;">World Tour</p>
-                <a href="#" class="shows-btn btn-comedy">Get Tickets</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/biswa.webp" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Biswa Kalyan Rath - Live</h3>
-                <p style="color: #aaa;">Stand-up Comedy Show</p>
-                <a href="#" class="shows-btn btn-comedy">Get Tickets</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/abhishek.webp" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Abhishek Upmanyu - Toxic</h3>
-                <p style="color: #aaa;">India Tour</p>
-                <a href="#" class="shows-btn btn-comedy">Get Tickets</a>
-            </div>
-            <div class="card">
-                <div class="card-image-placeholder">
-                    <img src="images/aakash.jpeg" alt="Poster" class="card-image-placeholder">
-                </div>
-                <h3>Aakash Gupta - New Show</h3>
-                <p style="color: #aaa;">Excuse Me Brother!</p>
-                <a href="#" class="shows-btn btn-comedy">Get Tickets</a>
-            </div>
-        </div>
-        <a href="#" class="view-all-btn" style="background-color: #00f2ea; color: black; border: none;">Explore More Shows</a>
-    </main>
 
-    <div class="subscription-section">
-        <h2>Never Miss A Beat</h2>
-        <p>Subscribe to get notified about the hottest events and exclusive pre-sale access</p>
-        <form class="subscription-form">
-            <input type="email" placeholder="Enter Email">
-            <button type="submit">Subscribe</button>
-        </form>
+<main class="container">
+    <h1 class="page-title">Comedy Shows</h1>
+    
+    <div style="margin-bottom: 30px; text-align: center;">
+        <input type="text" id="searchInput" onkeyup="filterComedy()" placeholder="Search for comedians..." 
+        style="padding: 12px; width: 80%; max-width: 400px; border: 1px solid #ccc; border-radius: 25px; outline: none; font-size: 16px;">
     </div>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>RhythmFest</h3>
-                <p>Your ultimate destination for live entertainment. From concerts to comedy, we've got the tickets to your next adventure.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Events</h3>
-                <ul>
-                    <li><a href="concerts.html">Concerts</a></li>
-                    <li><a href="festivals.html">Festivals</a></li>
-                    <li><a href="comedy.html">Comedy</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Socials</h3>
-                <ul>
-                    <li><a href="https://www.youtube.com/">Youtube</a></li>
-                    <li><a href="https://www.instagram.com/">Instagram</a></li>
-                    <li><a href="https://www.x.com/">Twitter (X)</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            © 2025 RhythmFest. All rights reserved.
-        </div>
-    </footer>
+    <div id="comedy-container" class="events-grid">
+        
+        <% if (comedyEvents.length > 0) { %>
+            <% comedyEvents.forEach(event => { %>
+                
+                <div class="event-card">
+                    <div class="event-card-image">
+                        <img src="<%= event.image %>" alt="<%= event.title %>">
+                    </div>
+                    
+                    <div class="event-details" style="flex-grow: 1;">
+                        <h3 style="margin-top: 15px;"><%= event.title %></h3>
+                        <p style="color: #aaa; margin-bottom: 15px;"><%= event.artist %></p>
+                    </div>
 
-</body>
-</html>
+                    <div class="event-action">
+                        <a href="/events/<%= event._id %>" class="btn-standard" style="background-color: #00f2ea; color: black;">
+                            Get Tickets
+                        </a>
+                    </div>
+                </div>
+
+            <% }) %>
+        <% } else { %>
+            <p>No comedy shows found.</p>
+        <% } %>
+
+    </div>
+
+    <a href="#" class="view-all-btn" style="background-color: #00f2ea; color: black; border: none; margin-top: 30px;">Explore More Shows</a>
+</main>
+
+<script>
+    function filterComedy() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toUpperCase();
+        const container = document.getElementById('comedy-container');
+        const cards = container.getElementsByClassName('event-card');
+
+        for (let i = 0; i < cards.length; i++) {
+            const text = cards[i].textContent || cards[i].innerText;
+            if (text.toUpperCase().indexOf(filter) > -1) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+<%- include('partials/footer') %>

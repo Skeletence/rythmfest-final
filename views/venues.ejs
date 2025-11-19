@@ -2,8 +2,13 @@
 
 <main class="container">
     <h1 class="page-title">Our Venues</h1>
-    
-    <div class="venues-grid"> 
+
+    <div style="margin-bottom: 30px; text-align: center;">
+        <input type="text" id="searchInput" onkeyup="filterVenues()" placeholder="Search for city or stadium..." 
+        style="padding: 12px; width: 80%; max-width: 400px; border: 1px solid #ccc; border-radius: 25px; outline: none; font-size: 16px;">
+    </div>
+
+    <div id="venues-container" class="venues-grid"> 
         
         <% if (venues.length > 0) { %>
             <% venues.forEach(venue => { %>
@@ -27,10 +32,34 @@
 
             <% }) %>
         <% } else { %>
-            <p>No venues found in the database.</p>
+            <p>No venues found.</p>
         <% } %>
 
     </div>
 </main>
+
+<script>
+    function filterVenues() {
+        // 1. Get input value
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toUpperCase();
+        
+        // 2. Get the container and cards
+        const container = document.getElementById('venues-container');
+        const cards = container.getElementsByClassName('venue-card');
+
+        // 3. Loop and Toggle Visibility
+        for (let i = 0; i < cards.length; i++) {
+            const text = cards[i].textContent || cards[i].innerText;
+            
+            // Check if text matches search
+            if (text.toUpperCase().indexOf(filter) > -1) {
+                cards[i].style.display = ""; // Show
+            } else {
+                cards[i].style.display = "none"; // Hide
+            }
+        }
+    }
+</script>
 
 <%- include('partials/footer') %>

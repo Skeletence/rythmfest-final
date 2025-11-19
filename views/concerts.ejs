@@ -1,58 +1,66 @@
 <%- include('partials/header') %>
 
 <main class="container">
-    <h1 class="page-title">Concerts</h1>
-    <div style="margin-bottom: 20px; text-align: center;">
-    <input type="text" id="searchInput" onkeyup="filterConcerts()" placeholder="Search for artists or locations..." 
-    style="padding: 10px; width: 80%; max-width: 400px; border: 1px solid #ccc; border-radius: 20px;">
-</div>
-    <div id="concerts-container" style="display: flex; flex-direction: column; gap: 20px;"> 
+    <h1 class="page-title">Upcoming Concerts</h1>
+
+    <div style="margin-bottom: 30px; text-align: center;">
+        <input type="text" id="searchInput" onkeyup="filterConcerts()" placeholder="Search by artist or city..." 
+        style="padding: 12px; width: 80%; max-width: 400px; border: 1px solid #ccc; border-radius: 25px; outline: none; font-size: 16px;">
+    </div>
+
+    <div id="concerts-container" class="events-grid"> 
         
         <% if (concerts.length > 0) { %>
             <% concerts.forEach(concert => { %>
-                <div class="concert-item">
-                    <div class="concert-image-placeholder">
-                        <img src="<%= concert.image %>" alt="Poster" class="concert-image-placeholder">
+                
+                <div class="event-card">
+                    
+                    <div class="event-card-image">
+                        <img src="<%= concert.image %>" alt="<%= concert.title %>">
                     </div>
-                    <div class="concert-details">
-                        <h3><%= concert.title %></h3>
-                        <p>Artist: <%= concert.artist %></p>
-                        <p>Location: <%= concert.location %></p>
-                        <p>Date: <%= concert.date %></p>
+
+                    <div class="event-details" style="flex-grow: 1;">
+                        <h3 style="margin-top: 15px;"><%= concert.title %></h3>
+                        <p><strong>Artist:</strong> <%= concert.artist %></p>
+                        <p><strong>Date:</strong> <%= concert.date %></p>
+                        <p><strong>Location:</strong> <%= concert.location %></p>
                     </div>
-                    <div class="concert-price <%= concert.priceClass %>"><%= concert.price %></div>
+
+                    <div class="event-action">
+                        <a href="/events/<%= concert._id %>" class="btn-standard">
+                            Get Tickets (<%= concert.price %>)
+                        </a>
+                    </div>
+
                 </div>
+
             <% }) %>
         <% } else { %>
             <p>No concerts found.</p>
         <% } %>
 
     </div>
-    <a href="#" class="view-all-btn" style="background-color: #9d1a33; border: none;">View More</a>
+    
+    <a href="#" class="view-all-btn" style="background-color: #9d1a33; color: white; border: none; margin-top: 30px;">View All Concerts</a>
+
 </main>
+
 <script>
     function filterConcerts() {
-        // 1. Get the search term
         const input = document.getElementById('searchInput');
         const filter = input.value.toUpperCase();
-        
-        // 2. Get all the concert cards
         const container = document.getElementById('concerts-container');
-        const cards = container.getElementsByClassName('concert-item');
+        const cards = container.getElementsByClassName('event-card');
 
-        // 3. Loop through all cards and hide those that don't match
         for (let i = 0; i < cards.length; i++) {
-            // Get the text content of the card (Artist, Title, Location)
-            const textContent = cards[i].textContent || cards[i].innerText;
-            
-            if (textContent.toUpperCase().indexOf(filter) > -1) {
-                cards[i].style.display = ""; // Show
+            const text = cards[i].textContent || cards[i].innerText;
+            if (text.toUpperCase().indexOf(filter) > -1) {
+                cards[i].style.display = "";
             } else {
-                cards[i].style.display = "none"; // Hide
+                cards[i].style.display = "none";
             }
         }
     }
 </script>
-
 
 <%- include('partials/footer') %>

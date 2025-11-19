@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+
+<main class="container details-main">
+    
+    <a href="javascript:history.back()" class="back-link">
+        &larr; Go Back
+    </a>
+
+    <div class="details-wrapper">
+        
+        <div class="details-image-col">
+            <img src="<%= event.image %>" alt="<%= event.title %>" class="details-img">
+        </div>
+
+        <div class="details-info-col">
+            
+            <span class="category-badge">
+                <%= event.category %>
+            </span>
+
+            <h1 class="details-title"><%= event.title %></h1>
+            
+            <% if (event.artist) { %>
+                <h3 class="details-subtitle"><%= event.artist %></h3>
+            <% } %>
+
+            <div class="info-box">
+                <p class="info-row">📅 <strong>Date:</strong> <%= event.date ? event.date : "Check availability" %></p>
+                <p class="info-row">📍 <strong>Location:</strong> <%= event.location %></p>
+                <p class="info-row price-highlight">🎟 Price: <%= event.price %></p>
+            </div>
+
+            <p class="details-desc">
+                Get ready for an amazing experience at <strong><%= event.location %></strong>. 
+                Secure your spot now for <strong><%= event.title %></strong> before tickets run out!
+            </p>
+
+            <button class="btn-book">
+                Proceed to Booking
+            </button>
+        </div>
+
+    </div>
+</main>
+
+<%- include('partials/footer') %>
