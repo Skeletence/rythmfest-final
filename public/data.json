@@ -1,0 +1,59 @@
+{
+    "concerts": [
+        {
+            "title": "Arijit Singh Live",
+            "artist": "Arijit Singh",
+            "location": "Palace Grounds, Bengaluru",
+            "date": "Nov 30, 2025 - 7:00 PM",
+            "price": "₹4999",
+            "priceClass": "price-red",
+            "image": "images/arijitsingh.jpg"
+        },
+        {
+            "title": "Prateek Kuhad - Silhouettes Tour",
+            "artist": "Prateek Kuhad",
+            "location": "Gachibowli Indoor Stadium, Hyderabad",
+            "date": "Dec 12, 2025 - 8:30 PM",
+            "price": "₹2499",
+            "priceClass": "price-blue",
+            "image": "images/prateekkuhad.jpg"
+        },
+        {
+            "title": "Shreya Ghoshal - Musical Night",
+            "artist": "Shreya Ghoshal",
+            "location": "Shanmukhananda Hall, Mumbai",
+            "date": "Jan 25, 2026 - 7:30 PM",
+            "price": "₹3999",
+            "priceClass": "price-red",
+            "image": "images/shreyaghoshal.jpeg"
+        }
+        
+    ],
+    "venues": [
+        {
+            "name": "Jawaharlal Nehru Stadium",
+            "city": "Delhi",
+            "shows": 34,
+            "image": "images/jnlstadium.jpeg"
+        },
+        {
+            "name": "MMRDA Grounds, BKC",
+            "city": "Mumbai",
+            "shows": 28,
+            "image": "images/mmrda.jpg"
+        },
+        {
+            "name": "Palace Grounds",
+            "city": "Bengaluru",
+            "shows": 41,
+            "image": "images/palacegrounds.avif"
+        },
+        {
+            "name": "Gachibowli Indoor Stadium",
+            "city": "Hyderabad",
+            "shows": 22,
+            "image": "images/indoorstadium.JPG"
+        }
+        
+    ]
+}

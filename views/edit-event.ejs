@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<main class="container" style="max-width: 600px; margin: 50px auto;">
+    <h1 class="page-title">Edit Event</h1>
+    
+    <form action="/edit-event/<%= event._id %>" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+        
+        <label>Title:</label>
+        <input type="text" name="title" value="<%= event.title %>" required>
+
+        <label>Category:</label>
+        <select name="category">
+            <option value="concert" <%= event.category === 'concert' ? 'selected' : '' %>>Concert</option>
+            <option value="venue" <%= event.category === 'venue' ? 'selected' : '' %>>Venue</option>
+            <option value="comedy" <%= event.category === 'comedy' ? 'selected' : '' %>>Comedy</option>
+            <option value="festival" <%= event.category === 'festival' ? 'selected' : '' %>>Festival</option>
+        </select>
+
+        <label>Location:</label>
+        <input type="text" name="location" value="<%= event.location %>" required>
+
+        <label>Date:</label>
+        <input type="text" name="date" value="<%= event.date %>">
+
+        <label>Price:</label>
+        <input type="text" name="price" value="<%= event.price %>">
+
+        <label>Image URL:</label>
+        <input type="text" name="image" value="<%= event.image %>" required>
+
+        <button type="submit" style="background-color: #007bff; color: white; padding: 10px; border: none; margin-top: 10px; cursor: pointer;">
+            Update Event
+        </button>
+    </form>
+</main>
+
+<%- include('partials/footer') %>

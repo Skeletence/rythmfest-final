@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<main class="container" style="max-width: 600px; margin: 50px auto;">
+    <h1 class="page-title">Add New Event</h1>
+    
+    <form action="/add-event" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+        
+        <label>Event Title / Venue Name:</label>
+        <input type="text" name="title" required placeholder="e.g., Cold Play Live">
+
+        <label>Category:</label>
+        <select name="category">
+            <option value="concert">Concert</option>
+            <option value="venue">Venue</option>
+            <option value="comedy">Comedy</option>
+            <option value="festival">Festival</option>
+        </select>
+
+        <label>Location / City:</label>
+        <input type="text" name="location" required placeholder="e.g., Mumbai">
+
+        <label>Date (Optional for Venues):</label>
+        <input type="text" name="date" placeholder="e.g., Dec 12, 2025">
+
+        <label>Price (Optional):</label>
+        <input type="text" name="price" placeholder="e.g., ₹4999">
+
+        <label>Image URL (Image should exist in /images folder):</label>
+        <input type="text" name="image" required value="/images/concert1.jpg">
+
+        <button type="submit" style="background-color: #9d1a33; color: white; padding: 10px; border: none; margin-top: 10px; cursor: pointer;">
+            Add Event
+        </button>
+    </form>
+</main>
+
+<%- include('partials/footer') %>
