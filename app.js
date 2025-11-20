@@ -97,22 +97,20 @@ app.listen(port, () => {
 
 // --- Admin` ---
 
-// Show the Add Event Page
 app.get('/add-event', (req, res) => {
     res.render('add-event');
 });
 
-// Handle the Form Submission (Create)
+// Handle the Form Submission 
 app.post('/add-event', async (req, res) => {
     try {
-        // Create a new Event using the data from the form 
         const newEvent = new Event(req.body);
         
-        // Save to MongoDB
+        // Saving to MongoDB
         await newEvent.save();
         
-        // Go back to the homepage (or the specific category page)
-        res.redirect('/' + req.body.category + 's'); // e.g., redirects to /concerts
+        // Go back to the homepage 
+        res.redirect('/' + req.body.category + 's'); 
     } catch (err) {
         console.log(err);
         res.send("Error saving event");
@@ -124,7 +122,6 @@ app.post('/add-event', async (req, res) => {
 // Get All Events for the Dashboard
 app.get('/admin', async (req, res) => {
     try {
-        // Fetch EVERYTHING from the database
         const events = await Event.find({});
         res.render('admin', { events: events });
     } catch (err) {
@@ -149,10 +146,8 @@ app.post('/delete-event', async (req, res) => {
 
 // --- EDIT PAGE ---
 
-//  Show the Edit Form
 app.get('/edit-event/:id', async (req, res) => {
     try {
-        // Find the specific event clicked
         const eventToEdit = await Event.findById(req.params.id);
         res.render('edit-event', { event: eventToEdit });
     } catch (err) {
@@ -164,10 +159,9 @@ app.get('/edit-event/:id', async (req, res) => {
 //  Handle the Update
 app.post('/edit-event/:id', async (req, res) => {
     try {
-        // Find by ID and update with the Form Data (req.body)
         await Event.findByIdAndUpdate(req.params.id, req.body);
         
-        // Go back to admin dashboard
+        
         res.redirect('/admin');
     } catch (err) {
         console.log(err);
@@ -178,10 +172,10 @@ app.post('/edit-event/:id', async (req, res) => {
 // --- DYNAMIC DETAILS PAGE CODE ---
 app.get('/events/:id', async (req, res) => {
     try {
-        // 1. Find the event by the ID passed in the URL
+        // Find the event by the ID passed in the URL
         const event = await Event.findById(req.params.id);
         
-        // 2. Render the details page with that data
+        // Render the details page with that data
         res.render('details', { event: event });
     } catch (err) {
         res.send("Event not found.");
